@@ -18,7 +18,7 @@ csTenTen17-extract -i csTenTen17.vert -o out.txt -n 100
 
 ## Parsing
 
-The parser utilized a stack which encodes different parsing states.
+The parser utilizes a fixed-sized stack, which encodes different parsing states.
 Documents are skipped if an invalid state is encountered.
 
 * `[0][0][0]`: Initial state
