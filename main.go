@@ -172,6 +172,12 @@ func main() {
 		if MatchSentenceClose(line) {
 			state[2] = 0
 
+			if len(sentence) > 0 {
+				// write the sentence to the buffer adding a new line, and reset the sentence
+				_, _ = b.WriteString(strings.Join(sentence, " ") + "\n")
+				sentence = []string{}
+			}
+
 			continue
 		}
 
@@ -188,6 +194,7 @@ func main() {
 		fields := strings.Fields(line)
 
 		if len(fields) > 0 {
+			// add the word, ie the first field, to the current sentence
 			sentence = append(sentence, fields[0])
 		}
 	}
@@ -196,5 +203,6 @@ func main() {
 		fmt.Println("Error reading file:", err)
 	}
 
+	// Ensures that all remaining sentences are written to the end of the file
 	b.Flush()
 }
